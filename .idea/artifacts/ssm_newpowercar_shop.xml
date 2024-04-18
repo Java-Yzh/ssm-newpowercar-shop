@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ssm_newpowercar_shop">
+    <output-path>$PROJECT_DIR$/classes/artifacts/ssm_newpowercar_shop</output-path>
+    <root id="archive" name="ssm_newpowercar_shop.war">
+      <element id="artifact" artifact-name="ssm_newpowercar_shop:Web exploded" />
+    </root>
+  </artifact>
+</component>

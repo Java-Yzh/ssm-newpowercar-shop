@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.DetailsDAO">
+	<resultMap type="details" id="detailsMap">
+		<id property="detailsid" column="detailsid" />
+		<result property="ordercode" column="ordercode" />
+		<result property="newcarid" column="newcarid" />
+		<result property="num" column="num" />
+		<result property="price" column="price" />
+		<result property="cityid" column="cityid" />
+		<result property="peihuoid" column="peihuoid" />
+		<result property="viewdate" column="viewdate" />
+		<result property="newcarname" column="newcarname" />
+		<result property="cityname" column="cityname" />
+		<result property="peihuoname" column="peihuoname" />
+	</resultMap>
+	<!-- 插入语句 DAO通过id调用此配置 -->
+	<insert id="insertDetails" parameterType="details">
+		insert into details(detailsid , ordercode , newcarid , num , price , cityid ,
+		peihuoid , viewdate ) values(#{detailsid} , #{ordercode} , #{newcarid} ,
+		#{num} , #{price} , #{cityid} , #{peihuoid} , #{viewdate} )
+	</insert>
+	<!-- 更新语句 DAO通过id调用此配置 -->
+	<update id="updateDetails" parameterType="details">
+		update details set ordercode=#{ordercode} , newcarid=#{newcarid} , num=#{num} ,
+		price=#{price} , cityid=#{cityid} , peihuoid=#{peihuoid} ,
+		viewdate=#{viewdate} where detailsid=#{detailsid}
+	</update>
+	<!-- 按主键删除 DAO通过id调用此配置 -->
+	<delete id="deleteDetails" parameterType="String">
+		delete from details where detailsid = #{detailsid}
+	</delete>
+	<!-- 查询全部信息 DAO通过id调用此配置 -->
+	<select id="getAllDetails" resultMap="detailsMap">
+		select a.* , b.newcarname , c.cityname , d.peihuoname from details a , newcar b
+		, city c , peihuo d where 1=1 and a.newcarid = b.newcarid and a.cityid =
+		c.cityid and a.peihuoid = d.peihuoid order by detailsid desc
+	</select>
+	<!-- 按主键查询 DAO通过id调用此配置 -->
+	<select id="getDetailsById" parameterType="String" resultMap="detailsMap">
+		select a.* , b.newcarname , c.cityname , d.peihuoname from details a ,
+		newcar b , city c , peihuo d where 1=1 and a.newcarid = b.newcarid and
+		a.cityid = c.cityid and a.peihuoid = d.peihuoid and
+		detailsid=#{detailsid} order by detailsid desc
+	</select>
+	<!-- 按条件精确查询 DAO通过id调用此配置 -->
+	<select id="getDetailsByCond" parameterType="details" resultMap="detailsMap">
+		select a.* , b.newcarname , c.cityname , d.peihuoname from details a ,
+		newcar b , city c , peihuo d where 1=1 and a.newcarid = b.newcarid and
+		a.cityid = c.cityid and a.peihuoid = d.peihuoid
+		<if test="ordercode != null and '' != ordercode">
+			and a.ordercode = #{ordercode}
+		</if>
+		<if test="newcarid != null and '' != newcarid">
+			and a.newcarid = #{newcarid}
+		</if>
+		<if test="num != null and '' != num">
+			and a.num = #{num}
+		</if>
+		<if test="price != null and '' != price">
+			and a.price = #{price}
+		</if>
+		<if test="cityid != null and '' != cityid">
+			and a.cityid = #{cityid}
+		</if>
+		<if test="peihuoid != null and '' != peihuoid">
+			and a.peihuoid = #{peihuoid}
+		</if>
+		<if test="viewdate != null and '' != viewdate">
+			and a.viewdate = #{viewdate}
+		</if>
+	</select>
+	<!-- 按条件模糊查询 DAO通过id调用此配置 -->
+	<select id="getDetailsByLike" parameterType="details" resultMap="detailsMap">
+		select a.* , b.newcarname , c.cityname , d.peihuoname from details a ,
+		newcar b , city c , peihuo d where 1=1 and a.newcarid = b.newcarid and
+		a.cityid = c.cityid and a.peihuoid = d.peihuoid
+		<if test="ordercode != null and '' != ordercode">
+			and a.ordercode like CONCAT('%', CONCAT(#{ordercode}, '%'))
+		</if>
+		<if test="newcarid != null and '' != newcarid">
+			and a.newcarid like CONCAT('%', CONCAT(#{newcarid}, '%'))
+		</if>
+		<if test="num != null and '' != num">
+			and a.num like CONCAT('%', CONCAT(#{num}, '%'))
+		</if>
+		<if test="price != null and '' != price">
+			and a.price like CONCAT('%', CONCAT(#{price}, '%'))
+		</if>
+		<if test="cityid != null and '' != cityid">
+			and a.cityid like CONCAT('%', CONCAT(#{cityid}, '%'))
+		</if>
+		<if test="peihuoid != null and '' != peihuoid">
+			and a.peihuoid like CONCAT('%', CONCAT(#{peihuoid}, '%'))
+		</if>
+		<if test="viewdate != null and '' != viewdate">
+			and a.viewdate like CONCAT('%', CONCAT(#{viewdate}, '%'))
+		</if>
+	</select>
+</mapper>
+
+

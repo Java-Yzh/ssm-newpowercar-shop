@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ssm_newpowercar_shop_war">
+    <output-path>$PROJECT_DIR$/classes/artifacts/ssm_newpowercar_shop_war</output-path>
+    <root id="archive" name="ssm_newpowercar_shop_war.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ssm_newpowercar_shop" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ssm_newpowercar_shop/web/Web" />
+    </root>
+  </artifact>
+</component>
